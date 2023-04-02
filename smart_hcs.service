@@ -8,8 +8,8 @@ After=postgresql.service
 User=admin
 Group=admin
 Type=simple
-WorkingDirectory=/home/admin/SmartHcsServer/hcs-server
-ExecStart=node /home/admin/SmartHcsServer/hcs-server/dist/index.js
+WorkingDirectory=/home/admin/SmartHcsServer/hcs_lite
+ExecStart=node /home/admin/SmartHcsServer/hcs_lite/dist/index.js
 KillMode=process
 KillSignal=9
 # В каких случаях сервис будет автоматически перезагружаться.
