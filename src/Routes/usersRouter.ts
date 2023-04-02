@@ -6,7 +6,7 @@ import { roleMiddlewareAdmin } from "../middleware/roleMiddleware";
 const usersRouter = express.Router();
 const usersController = new UsersController();
 
-usersRouter.get("/", usersController.getUsers);
+usersRouter.get("/", roleMiddlewareAdmin, usersController.getUsers);
 usersRouter.get("/:id", roleMiddlewareAdmin, usersController.getOneUser);
 usersRouter.get(
   "/get/pending",

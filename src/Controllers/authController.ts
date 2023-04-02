@@ -20,7 +20,7 @@ export class AuthController {
       //@ts-ignore
       const newUser = await apidb.createUser(
         name,
-        "user",
+        "prending",
         login,
         password,
         email
@@ -28,8 +28,7 @@ export class AuthController {
       return res.json(newUser);
     } catch (e) {
       console.log(e);
-      const message = "Registration error";
-      return res.status(400).json({ message: message });
+      return res.status(400).json({ message: e });
     }
   }
 

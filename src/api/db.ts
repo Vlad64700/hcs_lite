@@ -131,7 +131,7 @@ class APIDB {
     }
 
     const newUser = await db.query(
-      "INSERT INTO users (name, role, login, password, email, telegram, phone_number) \
+      "INSERT INTO users (name, role, login, password, email) \
       VALUES ($1, $2, $3, $4, $5) RETURNING *",
       [name, role, login, password, email]
     );
