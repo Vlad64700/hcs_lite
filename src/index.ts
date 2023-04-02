@@ -7,7 +7,7 @@ const http = require('http');
 //загружаем переменные из файла .env
 dotenv.config();
 
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 3020;
 const httpServer = http.createServer(app);
 
 httpServer.listen(PORT, () => {
