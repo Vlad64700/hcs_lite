@@ -1,0 +1,26 @@
+[Unit]
+Description=Smart HCS Service
+After=network.target
+After=postgresql.service
+
+[Service]
+# Пользователь и группа, с правами которых будет запускаться сервис
+User=admin
+Group=admin
+Type=simple
+WorkingDirectory=/home/admin/SmartHcsServer/hcs-server
+ExecStart=node /home/admin/SmartHcsServer/hcs-server/dist/index.js
+KillMode=process
+KillSignal=9
+# В каких случаях сервис будет автоматически перезагружаться.
+# on-failure — в случае выхода с ненулевым кодом возврата.
+Restart=on-failure
+# Таймаут перед загрузкой сервиса, после падения.
+RestartSec=1
+
+# Capablities для сервиса. В данном случае - разрешение сервису
+# биндиться на привилегированные порты (< 1000)
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+
+[Install]
+WantedBy=default.target
