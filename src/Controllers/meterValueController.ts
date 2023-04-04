@@ -176,7 +176,6 @@ export class MeterValueController {
       }
       const newValue = await apidb.createMeterValue(meter_id, null, value);
 
-      throw new Error("there is no sub-tariff for this period");
     } catch (e) {
       console.log(`\nОшибка доступа к БД \n${e} \n`);
       return res
