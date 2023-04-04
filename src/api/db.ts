@@ -440,14 +440,14 @@ class APIDB {
     return values.rows;
   }
 
-  async getMeterValueByMeterId(meter_id: number, time: string, count: number) {
+  async getMeterValueByMeterId(meter_id: number, time: number, count: number) {
     const values = await db.query(
-      "SELECT to_timestamp(meter_values.time/1000)::timestamp x, meter_values.value y\
+      "SELECT meter_values.time x, meter_values.value y\
       FROM meter_values \
-      WHERE meter_id = $1 and time>$2\
+      WHERE meter_id = $1 and time>to_timestamp($2)\
       order by meter_values.time\
       limit $3",
-      [meter_id, time, count]
+      [meter_id, time/1000, count]
     );
     if (values.rowCount === 0) {
       return [];

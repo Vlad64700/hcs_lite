@@ -50,7 +50,7 @@ export class MeterValueController {
       } else {
         time = this.getPeriod(years, months, days, hours, minutes);
       }
-
+      //@ts-ignore
       const values = await apidb.getMeterValueByMeterId(meter_id, time, count);
       return res.json(values);
     } catch (e) {
