@@ -175,6 +175,7 @@ export class MeterValueController {
         throw new Error("incorrect params");
       }
       const newValue = await apidb.createMeterValue(meter_id, null, value);
+      return res.json(newValue);
 
     } catch (e) {
       console.log(`\nОшибка доступа к БД \n${e} \n`);

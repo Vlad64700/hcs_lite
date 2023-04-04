@@ -465,8 +465,8 @@ class APIDB {
 
     const newValue = await db.query(
       "INSERT INTO meter_values (meter_id, value) \
-      VALUES ($1, $3) RETURNING *",
-      [meter_id, time, value]
+      VALUES ($1, $2) RETURNING *",
+      [meter_id, value]
     );
 
     return newValue.rows[0];
