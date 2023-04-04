@@ -40,7 +40,7 @@ export class MeterValueController {
   getValuesByMeterId = async (req: Request, res: Response) => {
     //прилетает кол-во лет, месяцев, дней, часов минут за которые надо вернуть показания
     const { meter_id, count, years, months, days, hours, minutes } = req.body;
-    if (isNaN(meter_id) || isNaN(count) || isNaN(years) || isNaN(months) || isNaN(days) || isNaN(hours) || isNaN(minutes)) {
+    if (isNaN(meter_id) || isNaN(count)) {
       throw new Error("incorrect params");
     }
     try {

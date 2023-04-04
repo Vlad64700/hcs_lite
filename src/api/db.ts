@@ -259,7 +259,7 @@ class APIDB {
       [user_id]
     );
     if (sensor.rowCount === 0)
-      throw new Error("Invalid index (user_id). Not found sensors for user_id");
+      return []
     return sensor.rows;
   }
 
