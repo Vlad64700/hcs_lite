@@ -7,7 +7,7 @@ const usersRouter = express.Router();
 const usersController = new UsersController();
 
 usersRouter.get("/", roleMiddlewareAdmin, usersController.getUsers);
-usersRouter.get("/:id", roleMiddlewareAdmin, usersController.getOneUser);
+usersRouter.get("/:id", authMiddleware, usersController.getOneUser);
 usersRouter.get(
   "/get/pending",
   roleMiddlewareAdmin,
