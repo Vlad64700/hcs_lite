@@ -4,12 +4,14 @@ import { pool as db } from "../db";
 import { generateAccessToken } from "../auth/generateAccessToken";
 import { apidb } from "../api/db";
 
+import { SHA_1 } from "../sha1"
+
 // route: /auth
 export class AuthController {
   async registration(req: Request, res: Response) {
     try {
       //пароль приходит уже зашифрованный
-      const { name, login, password, email } = req.body;
+      let { name, login, password, email } = req.body;
       const foundUser = await db.query("SELECT * FROM users WHERE login = $1", [
         login,
       ]);
@@ -17,6 +19,7 @@ export class AuthController {
       if (foundUser.rowCount > 0) {
         return res.status(400).json({ message: "The user already exists" });
       }
+      password=SHA_1(password).out_SHA_1;
       //@ts-ignore
       const newUser = await apidb.createUser(
         name,
@@ -25,7 +28,7 @@ export class AuthController {
         password,
         email
       );
-      return res.json(newUser);
+      return res.json({name: newUser.name});
     } catch (e) {
       console.log(e);
       return res.status(400).json({ message: e });
@@ -35,8 +38,8 @@ export class AuthController {
   async login(req: Request, res: Response) {
     try {
       //пароль приходит уже зашифрованный
-      const { login, password } = req.body;
-      console.log(password);
+      let { login, password } = req.body;
+      password=SHA_1(password).out_SHA_1;
 
       const user = await db.query("SELECT * FROM users WHERE login = $1", [
         login,
